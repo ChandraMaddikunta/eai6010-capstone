@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162868789-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-162868789-1');
+        setTimeout(function(){gtag('event', location.pathname, {'event_category': 'Новый посетитель'});}, 15000);
+
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Primary Meta Tags -->
+    <title>MA Risk Zones</title>
+    <meta name="title" content="MA COVID-19 spread risk zones">
+    <meta name="description"
+          content="Detailed statistics of Coronavirus spread by ZIP codes of state Massachusetts. Daily updating from John Hopkins Coronavirus Resource Center.">
+
+</head>
+<body>
+<div class="main-container">
+    <div class="dashboard-container">
+        <div class="google-map-container">
+            <div id="googleMap"></div>
+            <div id="info-box">Click on a zone<br>to get risk index</div>
+
+            <div class="search-bar">
+                <input type="text" id="search-input" onkeyup="search()" placeholder="Search for Zip codes..">
+
+                <ul id="search-helper-ul">
+<!--                    <li><a href="#">Adele</a></li>-->
+                </ul>
+            </div>
+            <div id="country-timeline-stat"></div>
+        </div>
+        <div class="right-dashboard-stat">
+            <p class="most-dangerous-title">The most dangerous areas in the Massachusetts</p>
+            <div class="most-dangerous-zips">
+                <table id="most-dangerous-table" class="most-dangerous-zips-table">
+                    <tr>
+                        <th>Zip Code</th>
+                        <th>City/Town</th>
+                        <th>County</th>
+                        <th>Risk Index*</th>
+                    </tr>
+                </table>
+            </div>
+            <p class="risk-index-details">* Risk index - value calculated by analytic intelligence
+                system using ML algorithms</p>
+            <p class="most-dangerous-title">Confirmed cases by county</p>
+            <div id="plot-container"></div>
+        </div>
+
+    </div>
+
+    <div id="footer" class="header-footer color-white">
+        <div>
+            <span class="color-gray-small weight-normal">Project</span><br>This project is a homework of EAI6010<br>
+        </div>
+        <div id="source-container">
+            <span class="color-gray-small weight-normal">Source</span><br>
+            <a href="hhttps://github.com/fedorgrab/eai6010-capstone" class="footer-link">List of
+                data sources</a><br>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./constants/map-style.js"></script>
+<script type="text/javascript" src="./constants/general.js"></script>
+<script type="text/javascript" src="./polygon-processing.js"></script>
+<script type="text/javascript" src="./info-block-text-content.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script type="text/javascript" src="./plot.js"></script>
+<script type="text/javascript" src="./graphql-queries.js"></script>
+<script type="text/javascript" src="./service.js"></script>
+<script type="text/javascript" src="map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAK1ru9G4NJiFAKGo3i0EVbeH7hu_RCvxs&callback=initMap"></script>
+
+</body>
+</html>

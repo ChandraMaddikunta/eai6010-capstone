@@ -1,7 +1,8 @@
 import re
 from collections import Counter
-import requests
+
 import geopandas as gpd
+import requests
 from bs4 import BeautifulSoup
 
 BASE_URL = "https://www.mass.gov"
@@ -20,10 +21,12 @@ def parse_park_list():
         link = a_link.get("href")
 
         if "locations" in link:
-            parks_links.append({
-                "park_name": a_link.contents[0],
-                "url": f"{BASE_URL}{a_link.get('href')}"
-            })
+            parks_links.append(
+                {
+                    "park_name": a_link.contents[0],
+                    "url": f"{BASE_URL}{a_link.get('href')}",
+                }
+            )
 
     return parks_links
 
@@ -33,7 +36,7 @@ def parse_park_zip_code(url):
     soup_park = BeautifulSoup(page_park.text, "html.parser")
     contact_group_tag = soup_park.find(class_="ma__contact-group__address")
     address_content = contact_group_tag.contents[0]
-    result = re.search(r'[0-9]{5}', address_content)
+    result = re.search(r"[0-9]{5}", address_content)
     return result.group(0)
 
 
