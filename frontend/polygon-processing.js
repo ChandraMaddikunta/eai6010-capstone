@@ -2,14 +2,15 @@ let riskRecordsMapped = {};
 
 
 function getStyleProvincePolygon(province) {
+  console.log(province);
   let zipCode = province.getProperty("GEOID10");
   let zoneData = riskRecordsMapped[zipCode];
+  let colorCoeff = 0;
   
-  let colorCoeff = zoneData.riskIndex / 110;
+  if (zoneData) {
+    colorCoeff = zoneData.riskIndex / 110;
+  }
   
-  // Additional scaling
-  // colorCoeff = colorCoeff < 0.5 ? colorCoeff * 1.3 : colorCoeff;
-  colorCoeff = colorCoeff < 0.2 ? colorCoeff * 2 : colorCoeff;
   colorCoeff = colorCoeff > 0.9 ? colorCoeff - 0.2 : colorCoeff;
   
   return ({
